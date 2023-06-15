@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
+import Navbar from './Navbar';
 
 const CreateUser = () => {
     const[username, setUsername] = useState('');
@@ -8,42 +9,31 @@ const CreateUser = () => {
         setUsername(event.target.value)
     }
 
-    const readData = async () => {
-        try {
-            await axios.get('http://localhost:5000/users/')
-            .then(res => console.log(res.data))
-            .catch(err => console.log(err.message))
-        } catch(err) {
-            console.log(err)
-        }
-    }
-
-    useEffect(() => {
-        readData()
-        console.log('User page')
-    },[]) 
-
     const createUser = async (event) => {
-        event.preventDefault(); 
         const user = {
             username: username
         }
         console.log(user)
         try {
-            await axios.post('http://localhost:5000/users/add/', null, {params: user})
+            await axios.post('http://localhost:5000/users/add/', user)
             .then(res => console.log(res))
             .catch(err => console.log(err))
         } catch(err) {
             console.log(err)
         }
+        event.preventDefault();
     }
   return (
-    <div>CreateUser
-        <form onSubmit={() => {createUser()}}>
-            <input value={username} onChange={event => changeUsername(event)}></input>
-            <button type='submit'>Create</button>
-        </form>
-        <p>What is going on</p>
+    <div>
+        <Navbar/>
+        <h5 style={{padding: '50px 0px 20px 20px'}}>Create New User</h5>
+        <div style={{paddingLeft: '20px'}}>
+            <form onSubmit={() => {createUser()}}>
+                <label htmlFor='username'>Username:</label>
+                <input value={username} onChange={event => changeUsername(event)} name='username' type='text' required style={{marginLeft: '10px'}}></input>
+                <button type='submit' style={{marginLeft: '10px'}} className='' onClick={() => {createUser()}}>Create</button>
+            </form>
+        </div>
     </div>
   )
 }
