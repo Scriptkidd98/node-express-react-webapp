@@ -42,3 +42,14 @@
 .action-button {
     margin-top: 20px;
 }
+.each-exercise {
+    border-radius: 4px;
+    box-shadow: 8px 8px 10px rgb(229, 226, 226);
+    padding: 10px 20px;
+    border: 0.5px solid silver;
+    margin-top: 30px;
+}
+.description {
+    font-size: large;
+    text-transform: uppercase;
+}
