@@ -27,7 +27,7 @@ const CreateExercise = () => {
         }
         try {
             await axios.post('http://localhost:5000/exercises/add/', exercise)
-            .then(res => {console.log(res.data); alert('Exercise added!')})
+            .then(res => alert('Exercise added!'))
             .catch(err => console.log(err))
         } catch(err) {
             console.log(err)
